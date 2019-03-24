@@ -1,5 +1,6 @@
-
-  var config = {
+$(document).ready(function(){
+ 
+ var config = {
     apiKey: "AIzaSyCmu0qffMdcNKkuRMrJ2NegSsFzNjuxsJk",
     authDomain: "train-28e83.firebaseapp.com",
     databaseURL: "https://train-28e83.firebaseio.com",
@@ -16,19 +17,19 @@
   
     // Grabs user input
     var trName = $("#train-name-input").val().trim();
-    var trDestination = $("#destination-input").val().trim();
+    var trDest = $("#dest-input").val().trim();
     var trStart = $("#start-input").val().trim();
     var trFrequency = $("#frequency-input").val().trim();
 
     console.log(trName);
-    console.log(trDestination);
+    console.log(trDest);
     console.log(trStart);
     console.log(trFrequency);
   
     // Creates local "temporary" object for holding employee data
     var newTr = {
       name: trName,
-      destination: trDestination,
+      dest: trDest,
       start: trStart,
       frequency: trFrequency,
     };
@@ -38,7 +39,7 @@
   
     // Logs everything to console
     console.log(newTr.name);
-    console.log(newTr.destination);
+    console.log(newTr.dest);
     console.log(newTr.start);
     console.log(newTr.frequency);
   
@@ -46,7 +47,7 @@
   
     // Clears all of the text-boxes
     $("#train-name-input").val("");
-    $("#destination-input").val("");
+    $("#dest-input").val("");
     $("#start-input").val("");
     $("#frequency-input").val("");
   });
@@ -55,41 +56,39 @@
   database.ref().on("child_added", function(childSnapshot) {
     console.log(childSnapshot.val());
   
-    // Store everything into a variable.
+    // Variable to pull info from firebase.
     var trName = childSnapshot.val().name;
-    var trDestination = childSnapshot.val().role;
+    var trDest = childSnapshot.val().dest;
     var trStart = childSnapshot.val().start;
-    var trFrequency = childSnapshot.val().rate;
+    var trFrequency = childSnapshot.val().frequency;
   
-    // Employee Info
+    // Console to test if data is pulling
     console.log(trName);
-    console.log(trDestination);
+    console.log(trDest);
     console.log(trStart);
     console.log(trFrequency);
   
-    // Prettify the employee start
-    // var empStartPretty = moment.unix(empStart).format("MM/DD/YYYY");
-  
-    // // Calculate the months worked using hardcore math
-    // // To calculate the months worked
-    // var empMonths = moment().diff(moment(empStart, "X"), "months");
-    // console.log(empMonths);
-  
-    // // Calculate the total billed rate
-    // var empBilled = empMonths * empRate;
-    // console.log(empBilled);
+    // Create time based data that updates in real time.
+    
+    var firstTimeConverted = moment(trStart, "HH:mm").subtract(1, "years");
+    var diffTime = moment().diff(moment(firstTimeConverted), "minutes");
+    var tRemainder = diffTime % trFrequency;
+    var tMinutesTillTrain = trFrequency - tRemainder;
+    var nextTrain = moment().add(tMinutesTillTrain, "minutes");
+    console.log(nextTrain);
+    // var arTime = moment().format(nextTrain, "LT");
+
   
     // Create the new row
     var newRow = $("<tr>").append(
       $("<td>").text(trName),
-      $("<td>").text(trDestination),
-      $("<td>").text(trStart),
-      $("<td>").text(""),
+      $("<td>").text(trDest),
       $("<td>").text(trFrequency),
-      $("<td>").text("")
+      $("<td>").text(nextTrain),
+      $("<td>").text(tMinutesTillTrain),
     );
   
     // Append the new row to the table
     $("#train-table > tbody").append(newRow);
   });
-  
+});

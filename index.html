@@ -8,6 +8,7 @@
     <script src="https://www.gstatic.com/firebasejs/5.9.1/firebase.js"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js"></script>
     <link rel="stylesheet" type="text/css" media="screen" href="assets\css\style.css">
     <script src="assets\javascript\javascript.js"></script>
     
@@ -17,7 +18,7 @@
     <div class="container">
 
         <!-- Jumbotron -->
-        <div class="jumbotron" style="background-color: navy; color: darkgreen; text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;">
+        <div class="jumbotron" style="background-color: navy; color: white; text-shadow: -1px 0 darkgreen, 0 1px darkgreen, 1px 0 darkgreen, 0 -1px darkgreen;">
           <h1 class="text-center">Raleigh-Durham Transit Authority</h1>
           <h3 class="text-center">Train Schedule</h3>
         </div>
@@ -35,7 +36,7 @@
                     <tr>
                       <th scope="col">Train Name</th>
                       <th scope="col">Destination</th>
-                      <th scope="col">Frequency</th>
+                      <th scope="col">Frequency (min)</th>
                       <th scope="col">Next Arrival</th>
                       <th scope="col">Minutes Away</th>
                     </tr>
@@ -62,11 +63,11 @@
                     <input class="form-control" id="train-name-input" placeholder="RDTA" type="text">
                   </div>
                   <div class="form-group">
-                    <label for="destination-input">Destination</label>
-                    <input class="form-control" id="destination-input" placeholder="Memphis" type="text">
+                    <label for="dest-input">Destination</label>
+                    <input class="form-control" id="dest-input" placeholder="Memphis" type="text">
                   </div>
                   <div class="form-group">
-                    <label for="start-input">First Train Time (HHmm - military Time)</label>
+                    <label for="start-input">First Train Time (HH:mm - military Time)</label>
                     <input class="form-control" id="start-input" placeholder="6:00" type="text">
                   </div>
                   <div class="form-group">
@@ -82,6 +83,7 @@
         </div>
     
       </div>
+      
     
       <!-- JavaScript -->
       <!-- <script src="timesheetLogic.js"></script> -->
