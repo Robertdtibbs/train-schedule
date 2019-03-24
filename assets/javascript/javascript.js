@@ -74,7 +74,7 @@ $(document).ready(function(){
     var tRemainder = diffTime % trFrequency;
     var tMinutesTillTrain = trFrequency - tRemainder;
     var nextTrain = moment().add(tMinutesTillTrain, "minutes");
-    var trainTime = moment().format(nextTrain, 'hh:mm a')
+    // var trainTime = moment().format(nextTrain, 'hh:mm a')
     console.log(nextTrain);
     // var arTime = moment().format(nextTrain, "LT");
 
@@ -84,7 +84,7 @@ $(document).ready(function(){
       $("<td>").text(trName),
       $("<td>").text(trDest),
       $("<td>").text(trFrequency),
-      $("<td>").text(trainTime),
+      $("<td>").text(nextTrain),
       $("<td>").text(tMinutesTillTrain),
     );
   
