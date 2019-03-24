@@ -42,27 +42,26 @@ $(document).ready(function(){
     console.log(newTr.dest);
     console.log(newTr.start);
     console.log(newTr.frequency);
+
   
-    alert("Train successfully added");
-  
-    // Clears all of the text-boxes
+    // Clear Text-box
     $("#train-name-input").val("");
     $("#dest-input").val("");
     $("#start-input").val("");
     $("#frequency-input").val("");
   });
   
-  // 3. Create Firebase event for adding employee to the database and a row in the html when a user adds an entry
+  //firebase snapshot - pulling data from server.
   database.ref().on("child_added", function(childSnapshot) {
     console.log(childSnapshot.val());
   
-    // Variable to pull info from firebase.
+    // Variable for firebase data
     var trName = childSnapshot.val().name;
     var trDest = childSnapshot.val().dest;
     var trStart = childSnapshot.val().start;
     var trFrequency = childSnapshot.val().frequency;
   
-    // Console to test if data is pulling
+    // Check if data is pulling
     console.log(trName);
     console.log(trDest);
     console.log(trStart);
@@ -75,20 +74,20 @@ $(document).ready(function(){
     var tRemainder = diffTime % trFrequency;
     var tMinutesTillTrain = trFrequency - tRemainder;
     var nextTrain = moment().add(tMinutesTillTrain, "minutes");
+    var trainTime = moment().format(nextTrain, 'hh:mm a')
     console.log(nextTrain);
     // var arTime = moment().format(nextTrain, "LT");
 
   
-    // Create the new row
+    // Dynamically greating new rows
     var newRow = $("<tr>").append(
       $("<td>").text(trName),
       $("<td>").text(trDest),
       $("<td>").text(trFrequency),
-      $("<td>").text(nextTrain),
+      $("<td>").text(trainTime),
       $("<td>").text(tMinutesTillTrain),
     );
   
-    // Append the new row to the table
     $("#train-table > tbody").append(newRow);
   });
 });
