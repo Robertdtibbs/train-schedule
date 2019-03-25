@@ -73,7 +73,7 @@ $(document).ready(function(){
     var diffTime = moment().diff(moment(firstTimeConverted), "minutes");
     var tRemainder = diffTime % trFrequency;
     var tMinutesTillTrain = trFrequency - tRemainder;
-    var nextTrain = moment().add(tMinutesTillTrain, "minutes");
+    var nextTrain = moment().add(tMinutesTillTrain, "minutes").format("HH:mm a");
     // var trainTime = moment().format(nextTrain, 'hh:mm a')
     console.log(nextTrain);
     // var arTime = moment().format(nextTrain, "LT");
